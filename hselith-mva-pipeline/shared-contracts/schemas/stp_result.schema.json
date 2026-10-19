@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/stp_result.schema.json",
+  "title": "StpResult",
+  "description": "Resultado de optimización estocástica mediante programación dinámica exacta (Value Iteration) sobre la subred cinetocoro/centrosoma para Track 2 Vía B.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "stp_result_id",
+    "module_name",
+    "target_node",
+    "optimal_policy",
+    "convergence_iterations",
+    "bellman_residual"
+  ],
+  "properties": {
+    "stp_result_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identificador único UUID del resultado del control STP."
+    },
+    "module_name": {
+      "type": "string",
+      "enum": ["kinetochore_sac", "centrosome"],
+      "description": "Módulo biológico de la subred STRING optimizado."
+    },
+    "target_node": {
+      "type": "string",
+      "description": "Nodo principal perturbado o evaluado (ej. TRIP13, MAD2L2, BUB1B, SHLD3, CEP57)."
+    },
+    "optimal_policy": {
+      "type": "object",
+      "description": "Mapeo de estados del sistema hacia acciones de control óptimas."
+    },
+    "value_function": {
+      "type": "object",
+      "description": "Función de valor convergente (costo esperado acumulado por estado)."
+    },
+    "convergence_iterations": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Número de iteraciones de Bellman requeridas para alcanzar convergencia."
+    },
+    "bellman_residual": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Residuo final de la ecuación de Bellman (norma infinito)."
+    },
+    "perturbation_regime": {
+      "type": ["string", "null"],
+      "description": "Descripción del régimen de perturbación o mutación simulado."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Marca temporal ISO-8601 de ejecución de la optimización."
+    }
+  }
+}
+

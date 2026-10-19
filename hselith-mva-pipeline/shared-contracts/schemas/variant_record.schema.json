@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/variant_record.schema.json",
+  "title": "VariantRecord",
+  "description": "Registro normalizado de una variante genómica (estructural SV o pequeña variante/indel) emitido por el módulo ejecutor de Manta/SV calling para consumo de la fusión de candidatos y priorización hacia el panel de 22 genes de MVA.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "variant_id",
+    "caller",
+    "chromosome",
+    "start_position",
+    "end_position",
+    "sv_type",
+    "filter_status",
+    "genotype"
+  ],
+  "properties": {
+    "variant_id": {
+      "type": "string",
+      "description": "Identificador único de la variante emitido por el caller (ej. MantaDEL:1045:0:1:0:0:0)."
+    },
+    "caller": {
+      "type": "string",
+      "description": "Herramienta bioinformática utilizada (ej. 'Manta v1.6.0')."
+    },
+    "chromosome": {
+      "type": "string",
+      "pattern": "^chr([1-9]|1[0-9]|2[0-2]|X|Y|M)$",
+      "description": "Cromosoma en coordenadas canónicas GRCh38 (ej. chr15)."
+    },
+    "start_position": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Posición de inicio (1-based, GRCh38)."
+    },
+    "end_position": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Posición de término (1-based, GRCh38)."
+    },
+    "sv_type": {
+      "type": "string",
+      "enum": ["DEL", "DUP", "INV", "INS", "BND", "SNV", "INDEL"],
+      "description": "Tipo de variante estructural (Deleción, Duplicación, Inversión, Inserción, Translocación/Breakend) o variante puntual."
+    },
+    "sv_length": {
+      "type": ["integer", "null"],
+      "description": "Longitud neta de la variante en pares de bases. Null para translocaciones o eventos BND."
+    },
+    "filter_status": {
+      "type": "string",
+      "description": "Estado del filtro de calidad VCF (ej. PASS, MinMQ, MaxDepth)."
+    },
+    "genotype": {
+      "type": "string",
+      "pattern": "^(0/1|1/1|0/0|\\./\\.|0\\|1|1\\|0|1\\|1)$",
+      "description": "Genotipo del proband en formato estándar VCF (ej. 0/1 para heterocigoto, 1/1 para homocigoto alterno)."
+    },
+    "qual_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Puntaje Phred de calidad de la variante asignado por el caller."
+    },
+    "ref_allele": {
+      "type": ["string", "null"],
+      "description": "Alelo de referencia (o secuencia de anclaje para SVs)."
+    },
+    "alt_allele": {
+      "type": ["string", "null"],
+      "description": "Alelo alternativo (o notación simbólica de breakend)."
+    },
+    "genes_affected": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de símbolos de genes (HGNC) cuyo cuerpo o región regulatoria intersecta la variante."
+    },
+    "is_mva_panel_gene": {
+      "type": "boolean",
+      "description": "Verdadero si la variante intersecta alguno de los 22 genes del panel de Mosaic Variegated Aneuploidy (Nivel 1 o Nivel 2)."
+    },
+    "intersects_cep57_lmn": {
+      "type": "boolean",
+      "description": "Verdadero si la variante afecta específicamente los dominios LMN de condensación biomolecular (LLPS) de CEP57."
+    }
+  }
+}
+

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/sample.schema.json",
+  "title": "Sample",
+  "description": "Field la crea, Core la gobierna como fuente única de verdad, Pipelines la consume (documento técnico, Sección 3.2). Solo campos mínimos compartidos — cada pieza extiende internamente (Sección 3.5).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sample_id",
+    "institution_id",
+    "collected_at",
+    "collector_user_id",
+    "geolocation",
+    "status"
+  ],
+  "properties": {
+    "sample_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "institution_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "FK → Institution."
+    },
+    "project_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "FK → Project. Nullable: una muestra puede no estar vinculada a un proyecto (Sección 3.4: relación opcional)."
+    },
+    "collected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "collector_user_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "FK → User."
+    },
+    "geolocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lat", "lng"],
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lng": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["STATUS_DRAFT", "STATUS_REGISTERED", "STATUS_ARCHIVED"]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/variant_ranking.schema.json",
+  "title": "VariantRankingRow",
+  "description": "Una fila del CSV de submission de Track 1 (predicción de variantes). Emitida por el pipeline genome-wide de piece-c-pipelines (generate_track1_submission.py). Campos y tipos calcados literalmente de la plantilla oficial de submission de Sage (actualizada 2026-08-28) — no inventar campos adicionales sin actualizar primero la plantilla oficial. Hasta 10 filas por submission, GRCh38 obligatorio.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proband_id",
+    "chrom_1",
+    "pos_1",
+    "ref_1",
+    "alt_1",
+    "epcr",
+    "finding_type"
+  ],
+  "properties": {
+    "proband_id": {
+      "type": "string",
+      "description": "Identificador del proband, provisto en el dataset del hackathon."
+    },
+    "chrom_1": {
+      "type": "string",
+      "pattern": "^chr([1-9]|1[0-9]|2[0-2]|X|Y|M)$",
+      "description": "Cromosoma de la primera (o única) variante, formato GRCh38 (ej. chr15)."
+    },
+    "pos_1": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Posición GRCh38 (base-pair) de la primera variante."
+    },
+    "ref_1": {
+      "type": "string",
+      "pattern": "^[ACGTN]+$",
+      "description": "Alelo de referencia de la primera variante."
+    },
+    "alt_1": {
+      "type": "string",
+      "pattern": "^[ACGTN]+$",
+      "description": "Alelo alternativo de la primera variante."
+    },
+    "chrom_2": {
+      "type": ["string", "null"],
+      "pattern": "^chr([1-9]|1[0-9]|2[0-2]|X|Y|M)$",
+      "description": "Cromosoma de la segunda variante — solo para pares compound-het. Null/vacío en cualquier otro caso."
+    },
+    "pos_2": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Posición GRCh38 de la segunda variante (compound-het). Null si no aplica."
+    },
+    "ref_2": {
+      "type": ["string", "null"],
+      "pattern": "^[ACGTN]+$",
+      "description": "Alelo de referencia de la segunda variante (compound-het). Null si no aplica."
+    },
+    "alt_2": {
+      "type": ["string", "null"],
+      "pattern": "^[ACGTN]+$",
+      "description": "Alelo alternativo de la segunda variante (compound-het). Null si no aplica."
+    },
+    "epcr": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "description": "Estimated Probability of Causal Relationship, (0,1]. En esta implementación es un valor de ordenamiento (no una probabilidad calibrada de causalidad); solo importa el ranking relativo entre las filas del propio submission, no un umbral absoluto."
+    },
+    "finding_type": {
+      "type": "string",
+      "enum": ["primary", "secondary"],
+      "description": "primary = candidato causal principal. secondary = hallazgo incidental/secundario — no penaliza el score automático."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Opcional. Justificación breve, especialmente para hallazgos secundarios (ej. relacionados a una condición distinta a la primaria)."
+    }
+  },
+  "if": {
+    "anyOf": [
+      { "required": ["chrom_2"] },
+      { "required": ["pos_2"] },
+      { "required": ["ref_2"] },
+      { "required": ["alt_2"] }
+    ]
+  },
+  "then": {
+    "required": ["chrom_2", "pos_2", "ref_2", "alt_2"],
+    "description": "Si se usa cualquier campo _2 (compound-het), los cuatro deben estar presentes juntos — no parcialmente."
+  }
+}

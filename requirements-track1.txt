@@ -1,0 +1,6 @@
+# HSelith Track 1: Variant Discovery & Prioritization Requirements
+# Pure Python 3.10+ zero-heavy-dependency runtime (generated and tested with 3.10.11)
+
+jsonschema>=4.20.0,<5.0.0
+pytest>=8.0.0,<10.0.0
+

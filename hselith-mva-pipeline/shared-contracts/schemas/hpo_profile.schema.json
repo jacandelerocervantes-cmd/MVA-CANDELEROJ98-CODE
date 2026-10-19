@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/hpo_profile.schema.json",
+  "title": "HpoProfile",
+  "description": "Perfil clínico fenotípico codificado con términos Human Phenotype Ontology (HPO) para el probando. Entrada contractual para priorización de candidatos y generación de BEDs de variantes dirigidas.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_id",
+    "proband_id",
+    "hpo_terms"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identificador único (UUID) del perfil fenotípico."
+    },
+    "proband_id": {
+      "type": "string",
+      "description": "Identificador del probando / paciente (ej. paciente WGS del hackathon)."
+    },
+    "hpo_terms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["hpo_id", "label"],
+        "properties": {
+          "hpo_id": {
+            "type": "string",
+            "pattern": "^HP:[0-9]{7}$",
+            "description": "Identificador canónico HPO (ej. HP:0002859)."
+          },
+          "label": {
+            "type": "string",
+            "description": "Etiqueta textual en inglés o español del rasgo fenotípico."
+          },
+          "is_negated": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indica si el fenotipo fue evaluado y descartado explícitamente (NOT)."
+          },
+          "onset_age": {
+            "type": ["string", "null"],
+            "description": "Edad o etapa de inicio del síntoma (ej. Congenital, Antenatal, Infantile)."
+          }
+        }
+      },
+      "description": "Conjunto de términos HPO observados en el probando."
+    },
+    "clinical_notes": {
+      "type": ["string", "null"],
+      "description": "Observaciones clínicas adicionales o antecedentes perinatales."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Marca temporal ISO-8601 de creación del perfil."
+    }
+  }
+}
+

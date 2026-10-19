@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/institution.schema.json",
+  "title": "Institution",
+  "description": "Institución licenciataria del ecosistema Bio Stelith. Frontera de aislamiento de datos e IAM/facturación (documento maestro, Sección 3). Entidad compartida por las 5 piezas funcionales (documento técnico, Sección 3.2).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["institution_id", "name", "status", "created_at"],
+  "properties": {
+    "institution_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identificador primario de la institución."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Nombre legal o de referencia de la institución licenciataria."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["STATUS_ACTIVE", "STATUS_SUSPENDED"],
+      "description": "STATUS_SUSPENDED es relevante al mecanismo de restricción de costo variable del Art. 38°-39° del Acta Constitutiva del BBY."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

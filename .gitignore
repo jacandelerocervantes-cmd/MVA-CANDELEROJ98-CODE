@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Patient-derived data (challenge data use agreement): never version
+data/
+raw_data/
+out/
+*.fastq.gz
+*.fq.gz
+*.bam
+*.bai
+*.sam
+*.cram
+*.fna
+*.fna.gz
+*.vcf
+*.vcf.gz
+*.vcf.gz.tbi
+*.tbi
+
+# Patient-derived outputs and clinical inputs of the proband: never version
+submissions/track1/*_genomewide_ranking.csv
+submissions/track1/*_phenotype_summary.json
+submissions/track1/*_consequence_validation.json
+hselith-mva-pipeline/piece-c-pipelines/src/modules/sv_calling/reference_data/proband_hpo_terms.json
+
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*service_account*.json
+*Sign-in*
+*backup*codes*
+*recovery*codes*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

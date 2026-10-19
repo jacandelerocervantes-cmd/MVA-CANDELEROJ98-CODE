@@ -1,0 +1,6 @@
+{
+  "description": "Structure of proband_hpo_terms.json. Copy this file to proband_hpo_terms.json (ignored by git) and replace the placeholder with the HPO terms of the proband from the Hackathon clinical document.",
+  "terms": [
+    {"id": "HP:0000000", "label": "placeholder: replace with the proband's HPO term"}
+  ]
+}

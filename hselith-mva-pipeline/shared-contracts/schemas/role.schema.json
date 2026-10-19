@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/role.schema.json",
+  "title": "Role",
+  "description": "Permisos asociados a un usuario, consumidos por iam-client. El documento técnico (Sección 4) da ejemplos de valores (RESEARCHER, LAB_ADMIN, FIELD_TECHNICIAN) sin cerrar la lista como enum — se deja como string con convención SCREAMING_SNAKE_CASE, no como enum cerrado, para no inventar un catálogo que el documento no fijó.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["role_id", "name", "institution_id"],
+  "properties": {
+    "role_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*$",
+      "maxLength": 100,
+      "examples": ["RESEARCHER", "LAB_ADMIN", "FIELD_TECHNICIAN"]
+    },
+    "institution_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "FK → Institution."
+    }
+  }
+}

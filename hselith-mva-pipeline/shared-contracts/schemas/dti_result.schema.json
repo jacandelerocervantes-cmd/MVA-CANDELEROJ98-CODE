@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/dti_result.schema.json",
+  "title": "DtiResult",
+  "description": "Resultado estructurado de afinidad fármaco-diana (DTI) predicho por la red MPNN-CNN (DeepPurpose) para Track 2.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dti_prediction_id",
+    "compound_name",
+    "smiles",
+    "target_name",
+    "model_name",
+    "predicted_pkd",
+    "estimated_kd_nm",
+    "affinity_class"
+  ],
+  "properties": {
+    "dti_prediction_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identificador único UUID de la predicción de afinidad."
+    },
+    "compound_name": {
+      "type": "string",
+      "description": "Nombre común o identificador del compuesto químico / ligando."
+    },
+    "smiles": {
+      "type": "string",
+      "description": "Cadena canónica SMILES del compuesto químico evaluado."
+    },
+    "target_name": {
+      "type": "string",
+      "description": "Símbolo canónico o nombre de la proteína diana (ej. TTK, MPS1, KIF18A)."
+    },
+    "target_uniprot_id": {
+      "type": ["string", "null"],
+      "description": "Identificador de acceso UniProt de la diana (ej. P33981)."
+    },
+    "target_sequence": {
+      "type": ["string", "null"],
+      "description": "Secuencia primaria de aminoácidos de la proteína utilizada en la inferencia."
+    },
+    "model_name": {
+      "type": "string",
+      "description": "Arquitectura o modelo DTI empleado (ej. MPNN_CNN_DAVIS)."
+    },
+    "predicted_pkd": {
+      "type": "number",
+      "description": "Afinidad predicha en escala pKd (-log10 Kd M)."
+    },
+    "estimated_kd_nm": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Constante de disociación estimada en nanomolar (nM)."
+    },
+    "estimated_ic50_nm": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Concentración inhibitoria media estimada en nanomolar (nM)."
+    },
+    "affinity_class": {
+      "type": "string",
+      "enum": ["high_affinity", "moderate_affinity", "weak_or_non_binder"],
+      "description": "Categorización biofísica de la interacción según el rango de Kd."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Marca temporal ISO-8601 de generación de la predicción."
+    }
+  }
+}
+

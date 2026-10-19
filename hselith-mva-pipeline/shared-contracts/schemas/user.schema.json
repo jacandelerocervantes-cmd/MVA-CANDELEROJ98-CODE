@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/user.schema.json",
+  "title": "User",
+  "description": "Identidad de quien actúa dentro del ecosistema. Validada por iam-client en cada pieza (documento técnico, Sección 6).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["user_id", "institution_id", "email", "status"],
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "institution_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "FK → Institution."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 320
+    },
+    "status": {
+      "type": "string",
+      "enum": ["STATUS_ACTIVE", "STATUS_DISABLED"]
+    }
+  }
+}

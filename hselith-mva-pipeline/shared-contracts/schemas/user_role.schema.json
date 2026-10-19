@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hselith-mva.example/schemas/shared-contracts/user_role.schema.json",
+  "title": "UserRole",
+  "description": "Tabla intermedia N:N entre User y Role (documento técnico, Sección 3.4 y 4).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["user_id", "role_id"],
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "FK → User."
+    },
+    "role_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "FK → Role."
+    }
+  }
+}
