@@ -1,6 +1,6 @@
 # Rare-variant pairing and phenotype ranking place two heterozygous *BUB1B* variants first in the patient, with phase undetermined
 
-**MVA Hackathon 2026 · Track 1 – Variant Prediction** · Juan Antonio Candelero Cervantes (single author) · Hugging Face model `candeleroj98_gatk-manta-fusion` · GitHub link: provided with this report · Licence: CC BY 4.0
+**MVA Hackathon 2026 · Track 1 – Variant Prediction** · Juan Antonio Candelero Cervantes (single author) · Hugging Face model `candeleroj98_gatk-manta-fusion` · Code: https://github.com/jacandelerocervantes-cmd/MVA-CANDELEROJ98-CODE-TRACK1 · Licence: CC BY 4.0
 
 ---
 
@@ -145,7 +145,7 @@ Installation instructions, and instructions for re-running the pipeline with acc
 
 ### 5.2 Data governance and licences
 
-The patient's data belong to the patient and their family; they were used under the terms of the Hackathon and are not redistributed. This report, the supporting tables and the source code are released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0; https://creativecommons.org/licenses/by/4.0/). Public resources used in the analysis, such as GRCh38, gnomAD, ClinVar and the HPO, keep their own licences, which are listed in the repository file THIRD_PARTY_LICENSES.md.
+The patient's data belong to the patient and their family; they were used under the terms of the Hackathon and are not redistributed. All data from the challenge will be deleted by 23 November 2026, within 30 days of the submission deadline of 24 October 2026, as the Official Rules require, and the deletion will be confirmed to the organisers by e-mail. This report, the supporting tables and the source code are released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0; https://creativecommons.org/licenses/by/4.0/). Public resources used in the analysis, such as GRCh38, gnomAD, ClinVar and the HPO, keep their own licences, which are listed in the repository file THIRD_PARTY_LICENSES.md.
 
 ### 5.3 Use of generative AI
 
