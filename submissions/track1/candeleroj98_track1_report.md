@@ -1,6 +1,6 @@
 # Rare-variant pairing and phenotype ranking place two heterozygous *BUB1B* variants first in the patient, with phase undetermined
 
-**MVA Hackathon 2026 · Track 1 – Variant Prediction** · Juan Antonio Candelero Cervantes (single author) · Hugging Face model `candeleroj98_gatk-manta-fusion` · GitHub: https://github.com/jacandelerocervantes-cmd/MVA-CANDELEROJ98-CODE · Licence: CC BY 4.0
+**MVA Hackathon 2026 · Track 1 – Variant Prediction** · Juan Antonio Candelero Cervantes (single author) · Hugging Face model `candeleroj98_gatk-manta-fusion` · GitHub link: provided with this report · Licence: CC BY 4.0
 
 ---
 
@@ -127,7 +127,7 @@ The study is a single-case, retrospective analysis of one patient's sequencing d
 - This is a single-case analysis, so its performance cannot be generalised.
 - The frequency, proximity and gene-family filters were adjusted after a first pass in which the leading candidate ranked fifth of 22 candidate genes; the sensitivity analysis (Annex A3) therefore describes the final pipeline, not its performance.
 - Without the frequency filter, the candidate pair falls to eighth place (Annex A3).
-- The phenotype-only rank of the leading gene depends strongly on one HPO term (from 14th to 228th of 5,277 genes when it is removed), although the gene stays first among the five candidates (Annex A4).
+- The phenotype-only rank of the leading gene depends strongly on one HPO term, rhabdomyosarcoma (from 14th to 228th of 5,277 genes when it is removed), although the gene stays first among the five candidates (Annex A4).
 - No phenotype permutation test was run.
 - Only recessive models in MANE Select transcripts were searched; de novo, dominant and low-fraction mosaic variants were not examined, and heterozygous calls on the non-pseudoautosomal X chromosome were discarded.
 - Indels were not left-normalised before the gnomAD lookup; this does not affect the two single-nucleotide variants of the leading candidate.
@@ -221,7 +221,7 @@ Genome-wide, 92 SV calls between 50 bp and 1 Mb that passed Manta's filters over
 | Term set | *BUB1B* similarity | *BUB1B* phenotype-only rank | *IGBP1* similarity | *DNAH10* similarity | *BUB1B* rank among the five candidates |
 |---|---|---|---|---|---|
 | All eight terms | 0.557 | 14 | 0.141 | 0.024 | 1 |
-| Removal that lowers *BUB1B* most | 0.440 | 228 | — | — | 1 |
+| Removal of the rhabdomyosarcoma term, which lowers *BUB1B* most | 0.440 | 228 | — | — | 1 |
 | Each of the other seven removals | Above 0.440, up to 0.722 | 6–36 | — | — | 1 |
 | Removal that raises *BUB1B* most (one of the seven) | 0.722 | — | 0.184 | 0.031 | 1 |
 
